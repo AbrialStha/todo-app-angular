@@ -4,6 +4,9 @@
 	<title>Todo App</title>
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<style type="text/css">
+		body{
+			background: azure;
+		}
 		#add_todo{
 			width:100%;
 			border: none;
@@ -72,7 +75,7 @@
 			TodoFactory.addItem($scope.item);
 			$scope.todoForm.$setPristine();
 			$scope.item = {
-				id: $scope.list.length,
+				_id: $scope.list.length,
 				todo:"",
 				status:'incomplete'
 			}
