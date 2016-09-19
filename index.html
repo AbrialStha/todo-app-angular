@@ -22,7 +22,7 @@
 					<li class="list-group-item" ng-repeat="item in list">
 						<input type="checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)">
 						<span ng-class="{'cross': checkStatus(item.status)}">{{item.todo}}</span>
-						<button type="button" class="close" ng-click="deleteItem()">&times;</button>
+						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>
 						<span></span>
 					</li>
 					<li class="list-group-item" ng-controller="TodoFormController">
@@ -64,7 +64,7 @@
 		}
 
 		$scope.deleteItem = function(id){
-			TodoFactory.deleteItem();
+			TodoFactory.deleteItem(id);
 		}
 	}]).
 	controller('TodoFormController',['$scope','TodoFactory', function($scope,TodoFactory){
@@ -105,12 +105,6 @@
 			}
 		];
 
-		var getIndex = function(){
-			todolist.forEach(function(item){
-				console.log(item._id);
-			});
-		}
-
 		todofac.getList = function(){
 			return todolist;
 		}
@@ -123,7 +117,7 @@
 		todofac.updateItem = function(id,index,value){
 			console.log(id,index,value);
 			if(index == 'status'){
-				
+
 				todolist.forEach(function(item){
 					console.log(item.id);
 					if(item._id == id)
@@ -133,8 +127,18 @@
 			console.log(todolist);
 		}
 
-		todofac.deleteItem = function(id){
-			getIndex();
+		todofac.deleteItem = function(id) {
+			var i = 0;//counter
+			todolist.forEach(function(obj) {
+				console.log(obj._id,id);
+				if(obj._id == id){
+					console.log('sucess',i);
+					todolist.splice(i,1)
+				}
+				i++;
+			});
+
+			console.log(todolist);
 		}
 
 		return todofac;
