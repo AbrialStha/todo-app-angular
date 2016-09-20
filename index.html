@@ -46,8 +46,13 @@
 	controller('TodoController',['$scope', 'TodoFactory', function($scope, TodoFactory){
 		$scope.list = TodoFactory.getList();
 
+		//for the unique id extra work ahhh
+		var id = function() {
+			return '_' + Math.random().toString(36).substr(2,9);
+		}
+
 		$scope.item = {
-			_id: $scope.list.length,
+			_id: id,
 			todo:"",
 			status:'incomplete'
 		}
