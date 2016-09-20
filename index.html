@@ -12,7 +12,7 @@
 		<h3>To Do App angular</h3>
 				<ul class="list-group">
 
-					<li class="list-group-item editable" ng-repeat="item in list">					
+					<li class="list-group-item editable" ng-repeat="item in $storage.list">					
 						<input type="checkbox" class="list-checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)">
 						<span ng-class="{'cross': checkStatus(item.status)}">{{item.task}}</span>
 						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>						
@@ -27,7 +27,7 @@
 
 				</ul>
 	</div>
-
+<script src="node_modules/ngstorage/ngstorage.js"></script>
 <script src="app/app.js"></script>
 <script src="app/controllers.js"></script>
 <script src="app/factory.js"></script>

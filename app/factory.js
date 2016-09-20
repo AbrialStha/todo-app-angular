@@ -1,27 +1,28 @@
 //Factory or Services(I like Factory :D)
 	app.factory('TodoFactory',function(){
 		var todofac = [];
+
 		var todolist = [
-			{
-				_id:0,
-				task:'npm init',
-				status:'completed'
-			},
-			{
-				_id:1,
-				task:'Install angular through npm, npm i angular -S',
-				status:'completed'
-			},
-			{
-				_id:2,
-				task:'Install bootstrap through npm, npm i bootstrap -S',
-				status:'completed'
-			},
-			{
-				_id:3,
-				task:'create a index.html and link all necessary files',
-				status:'completed'
-			}
+			// {
+			// 	_id:0,
+			// 	task:'npm init',
+			// 	status:'completed'
+			// },
+			// {
+			// 	_id:1,
+			// 	task:'Install angular through npm, npm i angular -S',
+			// 	status:'completed'
+			// },
+			// {
+			// 	_id:2,
+			// 	task:'Install bootstrap through npm, npm i bootstrap -S',
+			// 	status:'completed'
+			// },
+			// {
+			// 	_id:3,
+			// 	task:'create a index.html and link all necessary files',
+			// 	status:'completed'
+			// }
 		];
 
 		todofac.getList = function(){

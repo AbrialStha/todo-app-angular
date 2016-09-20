@@ -1,7 +1,11 @@
 //Controllers
 	app.
-	controller('TodoController',['$scope', 'TodoFactory', function($scope, TodoFactory){
+	controller('TodoController',['$scope', 'TodoFactory', '$localStorage', function($scope, TodoFactory, $localStorage){
 		$scope.list = TodoFactory.getList();
+		//Add to local Storage(initializing the default value)
+			$scope.$storage = $localStorage.$default({
+				list: TodoFactory.getList()
+			});
 
 		//for the unique id extra work ahhh
 		var id = function() {
@@ -41,15 +45,21 @@
 
 		//to change the status(basically toggling the status)
 		$scope.changeStatus = function(id,status){
-			if(status =='completed')
+			if(status =='completed'){
 				TodoFactory.updateItem(id,'status','incomplete');
-			else
+				//delete $localStorage.list;
+				$scope.$storage.list = TodoFactory.getList();
+			}
+			else{
 				TodoFactory.updateItem(id,'status','completed');
+				$scope.$storage.list = TodoFactory.getList();
+			}
 		}
 
 		//to delete a task
 		$scope.deleteItem = function(id){
 			TodoFactory.deleteItem(id);
+			$scope.$storage.list = TodoFactory.getList();
 		}
 
 		//to update the task
@@ -57,10 +67,11 @@
 			console.log(id);
 		}
 	}]).
-	controller('TodoFormController',['$scope','TodoFactory', function($scope,TodoFactory){
+	controller('TodoFormController',['$scope','TodoFactory', '$localStorage', function($scope,TodoFactory,$localStorage){
 		//form control action(this is for the TodoForm)
 		$scope.addTodo = function(){
 			TodoFactory.addItem($scope.item);
+			$scope.$storage.list = TodoFactory.getList();
 			$scope.todoForm.$setPristine();
 			$scope.item = {
 				_id: $scope.list.length,
