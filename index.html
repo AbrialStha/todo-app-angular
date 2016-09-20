@@ -15,6 +15,11 @@
 			text-decoration: line-through;
 			color:red;
 		}
+		.list-checkbox{
+			margin:0px !important;
+			position: relative;
+			bottom: -2px;
+		}
 	</style>
 </head>
 <body ng-app="todoApp">
@@ -22,11 +27,11 @@
 		<h3>To Do App angular</h3>
 
 				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="item in list">
-						<input type="checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)">
+					<li class="list-group-item" ng-repeat="item in list">						
+						<input type="checkbox" class="list-checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)">
 						<span ng-class="{'cross': checkStatus(item.status)}">{{item.todo}}</span>
 						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>
-						<span></span>
+						
 					</li>
 					<li class="list-group-item" ng-controller="TodoFormController">
 						<form name="todoForm" ng-submit="addTodo()" autocomplete="off">
@@ -38,119 +43,8 @@
 	</div>
 
 <script src="node_modules/angular/angular.js"></script>
-<script type="text/javascript">
-	var app = angular.module('todoApp',[]);
-
-	//Controllers
-	app.
-	controller('TodoController',['$scope', 'TodoFactory', function($scope, TodoFactory){
-		$scope.list = TodoFactory.getList();
-
-		//for the unique id extra work ahhh
-		var id = function() {
-			return '_' + Math.random().toString(36).substr(2,9);
-		}
-
-		$scope.item = {
-			_id: id,
-			todo:"",
-			status:'incomplete'
-		}
-
-		$scope.checkStatus = function(status){
-			if(status == 'completed')
-				return true;
-			else
-				return false;
-		}
-
-		$scope.changeStatus = function(id,status){
-			if(status =='completed')
-				TodoFactory.updateItem(id,'status','incomplete');
-			else
-				TodoFactory.updateItem(id,'status','completed');
-		}
-
-		$scope.deleteItem = function(id){
-			TodoFactory.deleteItem(id);
-		}
-	}]).
-	controller('TodoFormController',['$scope','TodoFactory', function($scope,TodoFactory){
-		$scope.addTodo = function(){
-			TodoFactory.addItem($scope.item);
-			$scope.todoForm.$setPristine();
-			$scope.item = {
-				_id: $scope.list.length,
-				todo:"",
-				status:'incomplete'
-			}
-		}
-	}]);
-
-	//Factory or Services(I like Factory :D)
-	app.factory('TodoFactory',function(){
-		var todofac = [];
-		var todolist = [
-			{
-				_id:0,
-				todo:'npm init',
-				status:'completed'
-			},
-			{
-				_id:1,
-				todo:'Install angular through npm, npm i angular -S',
-				status:'completed'
-			},
-			{
-				_id:2,
-				todo:'Install bootstrap through npm, npm i bootstrap -S',
-				status:'completed'
-			},
-			{
-				_id:3,
-				todo:'create a index.html and link all necessary files',
-				status:'completed'
-			}
-		];
-
-		todofac.getList = function(){
-			return todolist;
-		}
-
-		todofac.addItem = function(item){
-			todolist.push(item);
-			console.log(todolist);
-		}
-
-		todofac.updateItem = function(id,index,value){
-			console.log(id,index,value);
-			if(index == 'status'){
-
-				todolist.forEach(function(item){
-					console.log(item.id);
-					if(item._id == id)
-						item.status = value;
-				});
-			}
-			console.log(todolist);
-		}
-
-		todofac.deleteItem = function(id) {
-			var i = 0;//counter
-			todolist.forEach(function(obj) {
-				console.log(obj._id,id);
-				if(obj._id == id){
-					console.log('sucess',i);
-					todolist.splice(i,1)
-				}
-				i++;
-			});
-
-			console.log(todolist);
-		}
-
-		return todofac;
-	});
-</script>
+<script src="app/app.js"></script>
+<script src="app/controllers.js"></script>
+<script src="app/factory.js"></script>
 </body>
 </html>
