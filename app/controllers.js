@@ -5,9 +5,9 @@
 
 		//for the unique id extra work ahhh
 		var id = function() {
-			return '_' + Math.random().toString(36).substr(2,9);
+			return '_' + Math.random().toString(36).substr(2,9) + "-" + createUUID();
 		}
-		console.log(id());
+		// console.log(id());
 
 		//for the UUID
 		var createUUID = function() {
@@ -23,14 +23,15 @@
 		    var uuid = s.join("");
 		    return uuid;
 		}
-		console.log(createUUID());
+		// console.log(createUUID());
 
 		$scope.item = {
-			_id: id()+"-"+createUUID(),
+			_id: id(),
 			todo:"",
 			status:'incomplete'
 		}
 
+		//to check the status of the task
 		$scope.checkStatus = function(status){
 			if(status == 'completed')
 				return true;
@@ -38,6 +39,7 @@
 				return false;
 		}
 
+		//to change the status(basically toggling the status)
 		$scope.changeStatus = function(id,status){
 			if(status =='completed')
 				TodoFactory.updateItem(id,'status','incomplete');
@@ -45,11 +47,18 @@
 				TodoFactory.updateItem(id,'status','completed');
 		}
 
+		//to delete a task
 		$scope.deleteItem = function(id){
 			TodoFactory.deleteItem(id);
 		}
+
+		//to update the task
+		$scope.editItem = function(id){
+			console.log(id);
+		}
 	}]).
 	controller('TodoFormController',['$scope','TodoFactory', function($scope,TodoFactory){
+		//form control action(this is for the TodoForm)
 		$scope.addTodo = function(){
 			TodoFactory.addItem($scope.item);
 			$scope.todoForm.$setPristine();

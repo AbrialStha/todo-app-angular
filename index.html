@@ -9,20 +9,21 @@
 <body ng-app="todoApp">
 	<div class="container" ng-controller="TodoController">
 		<h3>To Do App angular</h3>
-
 				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="item in list">						
+
+					<li class="list-group-item editable" ng-repeat="item in list">					
 						<input type="checkbox" class="list-checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)">
 						<span ng-class="{'cross': checkStatus(item.status)}">{{item.todo}}</span>
-						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>
-						
+						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>						
 					</li>
+
 					<li class="list-group-item" ng-controller="TodoFormController">
 						<form name="todoForm" ng-submit="addTodo()" autocomplete="off">
 							<input type="text" id="add_todo" placeholder="Todo for..." ng-model="item.todo" required>
 							<button type="submit" class="hidden">Add Todo</button>
 						</form>
 					</li>
+
 				</ul>
 	</div>
 
