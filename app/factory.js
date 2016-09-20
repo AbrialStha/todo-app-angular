@@ -4,22 +4,22 @@
 		var todolist = [
 			{
 				_id:0,
-				todo:'npm init',
+				task:'npm init',
 				status:'completed'
 			},
 			{
 				_id:1,
-				todo:'Install angular through npm, npm i angular -S',
+				task:'Install angular through npm, npm i angular -S',
 				status:'completed'
 			},
 			{
 				_id:2,
-				todo:'Install bootstrap through npm, npm i bootstrap -S',
+				task:'Install bootstrap through npm, npm i bootstrap -S',
 				status:'completed'
 			},
 			{
 				_id:3,
-				todo:'create a index.html and link all necessary files',
+				task:'create a index.html and link all necessary files',
 				status:'completed'
 			}
 		];

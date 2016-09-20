@@ -27,7 +27,7 @@
 
 		$scope.item = {
 			_id: id(),
-			todo:"",
+			task:"",
 			status:'incomplete'
 		}
 
@@ -64,7 +64,7 @@
 			$scope.todoForm.$setPristine();
 			$scope.item = {
 				_id: $scope.list.length,
-				todo:"",
+				task:"",
 				status:'incomplete'
 			}
 		}
