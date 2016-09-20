@@ -1,0 +1,16 @@
+body{
+	background: azure;
+}
+#add_todo{
+	width:100%;
+	border: none;
+}
+.cross{
+	text-decoration: line-through;
+	color:red;
+}
+.list-checkbox{
+	margin:0px !important;
+	position: relative;
+	bottom: -2px;
+}
