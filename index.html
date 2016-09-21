@@ -20,7 +20,7 @@
 
 					<li class="list-group-item" ng-controller="TodoFormController">
 						<form name="todoForm" ng-submit="addTodo()" autocomplete="off">
-							<input type="text" id="add_todo" placeholder="Todo for..." ng-model="item.task" required>
+							<input type="text" id="add_todo" placeholder="Todo for..." ng-model="item.task" autofocus required>
 							<button type="submit" class="hidden">Add Todo</button>
 						</form>
 					</li>
