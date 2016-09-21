@@ -15,7 +15,7 @@
 					<li class="list-group-item editable" ng-repeat="item in $storage.list">					
 						<input type="checkbox" class="list-checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)">
 						<span ng-class="{'cross': checkStatus(item.status)}">{{item.task}}</span>
-						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>						
+						<button type="button" class="close" ng-click="deleteItem(item._id)">&times;</button>					
 					</li>
 
 					<li class="list-group-item" ng-controller="TodoFormController">
@@ -26,10 +26,15 @@
 					</li>
 
 				</ul>
+
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="task in $storage.list" my-task info="task"></li>
+				</ul>
 	</div>
 <script src="node_modules/ngstorage/ngstorage.js"></script>
 <script src="app/app.js"></script>
 <script src="app/controllers.js"></script>
 <script src="app/factory.js"></script>
+<script src="app/directive.js"></script>
 </body>
 </html>
