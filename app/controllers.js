@@ -7,30 +7,9 @@
 				list: TodoFactory.getList()
 			});
 
-		//for the unique id extra work ahhh
-		var id = function() {
-			return '_' + Math.random().toString(36).substr(2,9) + "-" + createUUID();
-		}
-		// console.log(id());
-
-		//for the UUID
-		var createUUID = function() {
-		    var s = [];
-		    var hexDigits = "0123456789abcdef";
-		    for (var i = 0; i < 36; i++) {
-		        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-		    }
-		    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
-		    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-		    s[8] = s[13] = s[18] = s[23] = "-";
-
-		    var uuid = s.join("");
-		    return uuid;
-		}
-		// console.log(createUUID());
 
 		$scope.item = {
-			_id: id(),
+			_id: '',
 			task:"",
 			status:'incomplete'
 		}
@@ -63,13 +42,46 @@
 		}
 
 		//to update the task
-		$scope.editItem = function(id){
+		$scope.updateTask = function(id){
 			console.log(id);
+			TodoFactory.updateItem( id, 'task', $scope.item.task );
+			$scope.$storage.list = TodoFactory.getList();
+			$scope.toggleShowInput();
 		}
+
+		//for the auto text input appear(magic)
+		$scope.showInput = false;
+	    $scope.toggleShowInput = function($timeout)
+	    {
+	        $scope.showInput = !$scope.showInput;
+	    }
 	}]).
 	controller('TodoFormController',['$scope','TodoFactory', '$localStorage', function($scope,TodoFactory,$localStorage){
+		//for the unique id extra work ahhh
+		var id = function() {
+			return '_' + Math.random().toString(36).substr(2,9) + "-" + createUUID();
+		}
+		// console.log(id());
+
+		//for the UUID
+		var createUUID = function() {
+		    var s = [];
+		    var hexDigits = "0123456789abcdef";
+		    for (var i = 0; i < 36; i++) {
+		        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+		    }
+		    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+		    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+		    s[8] = s[13] = s[18] = s[23] = "-";
+
+		    var uuid = s.join("");
+		    return uuid;
+		}
+		// console.log(createUUID());
+
 		//form control action(this is for the TodoForm)
 		$scope.addTodo = function(){
+			$scope.item._id = id();
 			TodoFactory.addItem($scope.item);
 			$scope.$storage.list = TodoFactory.getList();
 			$scope.todoForm.$setPristine();

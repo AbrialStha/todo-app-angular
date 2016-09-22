@@ -37,11 +37,18 @@
 		todofac.updateItem = function(id,index,value){
 			console.log(id,index,value);
 			if(index == 'status'){
-
+				//for updating the status
 				todolist.forEach(function(item){
 					console.log(item.id);
 					if(item._id == id)
 						item.status = value;
+				});
+			}else if(index == 'task'){
+				//for updating the task
+				todolist.forEach(function(item){
+					console.log(item.id);
+					if(item._id == id)
+						item.task = value;
 				});
 			}
 			console.log(todolist);

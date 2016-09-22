@@ -1,7 +1,7 @@
 body{
 	background: azure;
 }
-#add_todo{
+.add_todo{
 	width:100%;
 	border: none;
 }
