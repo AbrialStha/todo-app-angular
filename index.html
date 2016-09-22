@@ -13,14 +13,14 @@
 		<h3>To Do App angular</h3>
 				<ul class="list-group">
 
-					<li class="list-group-item editable" ng-repeat="item in $storage.list" ng-dblclick='toggleShowInput()'>					
+					<li class="list-group-item editable" ng-repeat="item in $storage.list" ng-dblclick='toggleShowInput()'>			
 
 						<input type="checkbox" class="list-checkbox" ng-checked="checkStatus(item.status)" ng-Click="changeStatus(item._id,item.status)" ng-hide='showInput'>
 						<span ng-class="{'cross': checkStatus(item.status)}" ng-hide='showInput'>{{item.task}}</span>
 						<button type="button" class="close" ng-click="deleteItem(item._id)" ng-hide='showInput'>&times;</button>					
 
 						<form name="editTask" ng-submit="updateTask(item._id)" ng-show='showInput' autocomplete="off">
-							<input type="text" class="add_todo" value="{{item.task}}" ng-model="item.task" focus='true' required>
+							<input type="text" class="add_todo" value="{{item.task}}" ng-model="item.task" todo-focus='true == showInput' todo-escape="revertEdits(item._id)" required>
 							<button type="submit" class="hidden">Add Todo</button>
 						</form>
 					</li>

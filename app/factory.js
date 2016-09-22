@@ -29,6 +29,16 @@
 			return todolist;
 		}
 
+		todofac.getItem = function(id){
+			//shitty forEach not letting me return
+			for(i=0;i<todolist.length;i++){
+				if(todolist[i]._id == id){
+					return todolist[i];
+				}
+			}
+			return false;
+		}
+
 		todofac.addItem = function(item){
 			todolist.push(item);
 			console.log(todolist);

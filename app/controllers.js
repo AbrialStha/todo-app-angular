@@ -55,6 +55,12 @@
 	    {
 	        $scope.showInput = !$scope.showInput;
 	    }
+	    $scope.revertEdits = function(id){
+	    	console.log(id);
+	    	var oldItem = TodoFactory.getItem(id);
+	    	console.log(oldItem);
+	    	$scope.toggleShowInput();
+	    }
 	}]).
 	controller('TodoFormController',['$scope','TodoFactory', '$localStorage', function($scope,TodoFactory,$localStorage){
 		//for the unique id extra work ahhh
